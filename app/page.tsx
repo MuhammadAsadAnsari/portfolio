@@ -8,8 +8,7 @@ import Footer from "@/components/Footer";
 export default function HomePage() {
   return (
     <main>
-      <TopNav />
-      <Hero />cls
+      <Hero />
       
       <WorkExperience />
       <Projects />

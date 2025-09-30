@@ -3,7 +3,7 @@ import SectionTitle from "./SectionTitle";
 
 export default function Projects() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 space-y-16">
+    <section id="projects" className="mx-auto max-w-6xl px-4 py-16 space-y-16 scroll-mt-20">
       <SectionTitle>Selected Projects</SectionTitle>
       <ProjectCard
         title="Example Project"

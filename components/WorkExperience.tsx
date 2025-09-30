@@ -5,7 +5,7 @@ import { Code2, Smartphone, Sparkle, Rocket } from "lucide-react";
 
 export default function WorkExperience() {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-10">
+    <section id="work" className="mx-auto max-w-6xl px-4 pb-10 scroll-mt-20">
       <SectionTitle>Work Experience</SectionTitle>
       <div className="grid md:grid-cols-2 gap-4">
         <WorkCard title="CB on the Mobile" subtitle="Frontend Engineer" period="2022 — Present">

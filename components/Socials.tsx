@@ -12,7 +12,7 @@ export default function Socials() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3">
       {socials.map(({ href, icon: Icon, label }) => (
-        <Link key={href} href={href} aria-label={label} className="glass rounded-xl px-3 py-2 inline-flex items-center gap-2 hover:shadow-glow transition">
+        <Link key={href} href={href} aria-label={label} className="bg-white/5 backdrop-blur border border-white/10 rounded-xl px-3 py-2 inline-flex items-center gap-2 transition">
           <Icon className="h-4 w-4" />
           <span className="text-xs">{label}</span>
         </Link>
