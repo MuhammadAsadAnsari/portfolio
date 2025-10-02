@@ -9,7 +9,7 @@ const EXPERIENCES = [
     subtitle:
       "At Aigumind, I lead the development and deployment of MERN stack applications, guide interns through training sessions, and ensure project goals are achieved on schedule. My role blends technical execution with mentorship, contributing to scalable and efficient software solutions.",
     period: "Jul 2025 – Present",
-    iconSrc: "/AsadRazaExperience4.png",
+    iconSrc: "/AsadRazaExperience6.png",
   },
   {
     title: "Freelance Developer | Self-Employed",
