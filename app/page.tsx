@@ -11,9 +11,9 @@ export default function HomePage() {
       <Hero />
       
       <WorkExperience />
-      <Projects />
-      <Availability />
-      <Footer />
+      {/* <Projects /> */}
+      {/* <Availability /> */}
+      {/* <Footer /> */}
     </main>
   );
 }

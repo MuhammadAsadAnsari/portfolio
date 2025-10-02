@@ -18,6 +18,7 @@ const links = [
 export default function TopNav() {
   const pathname = usePathname();
   const [active, setActive] = useState<string>("#home");
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const sectionElements = links
@@ -56,6 +57,7 @@ export default function TopNav() {
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
         history.replaceState(null, "", href);
+        setOpen(false);
       }
     }
   };
@@ -63,7 +65,8 @@ export default function TopNav() {
     <header className="sticky top-0 z-50 w-full bg-[#1A0B2E] border-b border-white/5">
       <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
         <Link href="/" className={cn(jakarta.className, "text-[20px] leading-none tracking-[0.02em]")}>✦</Link>
-        <nav className={cn(jakarta.className, "flex gap-8 text-[12px] leading-none tracking-[0.02em]")}> 
+        {/* desktop nav */}
+        <nav className={cn(jakarta.className, "hidden sm:flex gap-6 md:gap-8 text-[12px] md:text-[14px] leading-none tracking-[0.02em]")}> 
           {links.map(l => (
             <Link
               key={l.href}
@@ -78,7 +81,35 @@ export default function TopNav() {
             </Link>
           ))}
         </nav>
+        {/* mobile toggle */}
+        <button
+          aria-label="Toggle menu"
+          className="sm:hidden inline-flex items-center justify-center h-8 w-8 rounded-md border border-white/10 text-white/80 hover:text-white hover:border-white/30"
+          onClick={() => setOpen(v => !v)}
+        >
+          ☰
+        </button>
       </div>
+      {/* mobile dropdown */}
+      {open && (
+        <div className={cn(jakarta.className, "sm:hidden border-t border-white/10 bg-[#1A0B2E]")}> 
+          <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-3 text-[14px]">
+            {links.map(l => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={(e) => handleNavClick(e, l.href)}
+                className={cn(
+                  "py-1 hover:text-accent transition-colors",
+                  active === l.href && "text-accent"
+                )}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
