@@ -3,8 +3,13 @@ import type { Metadata } from "next";
 import TopNav from "@/components/TopNav";
 
 export const metadata: Metadata = {
-  title: "Portfolio — Software Engineer",
+  title: "Muhammad Asad Raza - Portfolio",
   description: "Personal portfolio built with Next.js 14, Tailwind & Framer Motion.",
+  icons: {
+    icon: "/Me.png",
+    shortcut: "/Me.png",
+    apple: "/Me.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

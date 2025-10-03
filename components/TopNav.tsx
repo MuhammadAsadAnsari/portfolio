@@ -10,6 +10,8 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: "600" });
 const links = [
   { href: "#home", label: "Home" },
   { href: "#work", label: "Work" },
+  { href: "#skills", label: "Skills" },
+
   { href: "#projects", label: "Projects" },
   { href: "#availability", label: "Availability" },
   { href: "#contact", label: "Contact" },
