@@ -1,43 +1,70 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Menu, X } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const GooeyNav = dynamic(() => import("./GooeyNav"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center">
+      <div className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 px-2 sm:px-4">
+        {links.map((link, index) => (
+          <a
+            key={index}
+            href={link.href}
+            className="outline-none py-[0.4em] px-[0.6em] sm:py-[0.5em] sm:px-[0.8em] md:py-[0.6em] md:px-[1em] inline-block text-sm sm:text-base whitespace-nowrap text-white hover:text-gray-300 transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+});
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: "600" });
 
 const links = [
-  { href: "#home", label: "Home" },
-  { href: "#work", label: "Work" },
-  { href: "#skills", label: "Skills" },
-
-  { href: "#projects", label: "Projects" },
-  { href: "#availability", label: "Availability" },
-  { href: "#contact", label: "Contact" },
-] as const;
+  { href: "home", label: "Home" },
+  { href: "aboutMe", label: "About Me" },
+  { href: "work", label: "Work" },
+  { href: "skills", label: "Skills" },
+  { href: "projects", label: "Projects" },
+  { href: "contact", label: "Contact" },
+];
 
 export default function TopNav() {
-  const pathname = usePathname();
-  const [active, setActive] = useState<string>("#home");
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const sectionElements = links
-      .map(l => document.getElementById(l.href.slice(1)))
+      .map(l => document.getElementById(l.href))
       .filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setActive(`#${(entry.target as HTMLElement).id}`);
+            const targetId = (entry.target as HTMLElement).id;
+            const index = links.findIndex(link => link.href === targetId);
+            if (index !== -1) {
+              setActiveIndex(index);
+            }
           }
         }
       },
       {
         root: null,
-        // Top 35% acts as activation zone so the next section highlights as you enter it
         rootMargin: "-35% 0px -60% 0px",
         threshold: 0,
       }
@@ -48,66 +75,95 @@ export default function TopNav() {
       sectionElements.forEach(el => observer.unobserve(el));
       observer.disconnect();
     };
-  }, []);
+  }, [mounted]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Smooth-scroll and update URL hash without full navigation
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const id = href.slice(1);
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        history.replaceState(null, "", href);
-        setOpen(false);
-      }
+  const handleNavClick = (href: string, index: number) => {
+    const el = document.getElementById(href);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveIndex(index);
+      setOpen(false);
     }
   };
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <header className="sticky top-0 z-50 w-full bg-[#1A0B2E] border-b border-white/5">
+        <div className="flex items-center justify-between px-4 py-4">
+          {/* Desktop GooeyNav placeholder */}
+          <div className="hidden lg:block flex-1">
+            <GooeyNav
+              items={links}
+              initialActiveIndex={activeIndex}
+              onItemClick={handleNavClick}
+              particleCount={15}
+              particleDistances={[90, 10]}
+              particleR={100}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            />
+          </div>
+
+          {/* Mobile hamburger button placeholder */}
+          <button
+            className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <Menu size={24} />
+          </button>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full bg-[#1A0B2E] border-b border-white/5">
-      <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-        <Link href="/" className={cn(jakarta.className, "text-[20px] leading-none tracking-[0.02em]")}>✦</Link>
-        {/* desktop nav */}
-        <nav className={cn(jakarta.className, "hidden sm:flex gap-6 md:gap-8 text-[12px] md:text-[14px] leading-none tracking-[0.02em]")}> 
-          {links.map(l => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={(e) => handleNavClick(e, l.href)}
-              className={cn(
-                "hover:text-accent transition-colors",
-                active === l.href && "text-accent"
-              )}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-        {/* mobile toggle */}
+      <div className="flex items-center justify-between px-4 py-4">
+        {/* Desktop GooeyNav */}
+        <div className="hidden lg:block flex-1">
+          <GooeyNav
+            items={links}
+            activeIndex={activeIndex}
+            onItemClick={handleNavClick}
+            particleCount={15}
+            particleDistances={[90, 10]}
+            particleR={100}
+            animationTime={600}
+            timeVariance={300}
+            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+          />
+        </div>
+
+        {/* Mobile hamburger button */}
         <button
+          onClick={() => setOpen(!open)}
+          className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors"
           aria-label="Toggle menu"
-          className="sm:hidden inline-flex items-center justify-center h-8 w-8 rounded-md border border-white/10 text-white/80 hover:text-white hover:border-white/30"
-          onClick={() => setOpen(v => !v)}
         >
-          ☰
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
-      {/* mobile dropdown */}
+
+      {/* Mobile dropdown */}
       {open && (
-        <div className={cn(jakarta.className, "sm:hidden border-t border-white/10 bg-[#1A0B2E]")}> 
-          <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-3 text-[14px]">
-            {links.map(l => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={(e) => handleNavClick(e, l.href)}
+        <div className={cn(jakarta.className, "lg:hidden border-t border-white/10 bg-[#1A0B2E]")}>
+          <div className="px-4 py-3 flex flex-col gap-3 text-sm">
+            {links.map((link, index) => (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href, index)}
                 className={cn(
-                  "py-1 hover:text-accent transition-colors",
-                  active === l.href && "text-accent"
+                  "text-left py-2 px-3 rounded-lg hover:bg-purple-500/20 transition-colors",
+                  activeIndex === index && "text-white font-semibold shadow-lg"
                 )}
+                style={activeIndex === index ? { 
+                  backgroundColor: 'rgba(139, 92, 246, 0.3)',
+                  boxShadow: '0 0 15px rgba(139, 92, 246, 0.4)'
+                } : {}}
               >
-                {l.label}
-              </Link>
+                {link.label}
+              </button>
             ))}
           </div>
         </div>

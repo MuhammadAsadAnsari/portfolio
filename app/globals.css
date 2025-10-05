@@ -2,6 +2,311 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom animations for AboutMe component */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+}
+
+@keyframes counterUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(147, 51, 234, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.6);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.counter-animation {
+  animation: counterUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Stepper alignment fixes */
+.stepper-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.stepper-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* Force stepper elements to center */
+[class*="step-circle-container"] {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+[class*="step-container"] {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+[class*="content-wrapper"] {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+[class*="footer"] {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* 3D Motion Effects for About Me Section */
+@keyframes popUp3D {
+  0% {
+    transform: translateY(0) translateZ(0) rotateX(0deg);
+    box-shadow: 0 0 0 rgba(147, 51, 234, 0);
+  }
+  50% {
+    transform: translateY(-8px) translateZ(20px) rotateX(2deg);
+    box-shadow: 0 15px 30px rgba(147, 51, 234, 0.3);
+  }
+  100% {
+    transform: translateY(-5px) translateZ(15px) rotateX(1deg);
+    box-shadow: 0 10px 25px rgba(147, 51, 234, 0.4);
+  }
+}
+
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotateY(0deg) rotateX(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotateY(1deg) rotateX(0.5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateY(0deg) rotateX(1deg);
+  }
+  75% {
+    transform: translateY(-3px) rotateY(-1deg) rotateX(0.5deg);
+  }
+}
+
+@keyframes glow3D {
+  0%, 100% {
+    box-shadow: 
+      0 0 10px rgba(147, 51, 234, 0.2),
+      0 0 20px rgba(59, 130, 246, 0.1),
+      inset 0 0 20px rgba(147, 51, 234, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(147, 51, 234, 0.4),
+      0 0 40px rgba(59, 130, 246, 0.2),
+      inset 0 0 30px rgba(147, 51, 234, 0.2);
+  }
+}
+
+@keyframes tilt3D {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(1000px) rotateX(1deg) rotateY(1deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  75% {
+    transform: perspective(1000px) rotateX(-1deg) rotateY(-1deg);
+  }
+}
+
+.animate-pop-up-3d {
+  animation: popUp3D 0.6s ease-out forwards;
+  transform-style: preserve-3d;
+}
+
+.animate-float-3d {
+  animation: float3D 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-glow-3d {
+  animation: glow3D 4s ease-in-out infinite;
+}
+
+.animate-tilt-3d {
+  animation: tilt3D 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: perspective(1000px) translateY(-10px) translateZ(25px) rotateX(3deg);
+  box-shadow: 
+    0 20px 40px rgba(147, 51, 234, 0.3),
+    0 0 30px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Eye-catching animations for About Me */
+@keyframes attentionGrab {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(147, 51, 234, 0.4),
+      0 0 40px rgba(59, 130, 246, 0.3),
+      0 0 60px rgba(147, 51, 234, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(147, 51, 234, 0.6),
+      0 0 60px rgba(59, 130, 246, 0.4),
+      0 0 90px rgba(147, 51, 234, 0.3);
+  }
+}
+
+@keyframes vibrantPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+}
+
+.animate-attention-grab {
+  animation: attentionGrab 3s ease-in-out infinite;
+}
+
+.animate-vibrant-pulse {
+  animation: vibrantPulse 4s ease-in-out infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

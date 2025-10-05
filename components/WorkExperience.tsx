@@ -8,7 +8,7 @@ const EXPERIENCES = [
     title: "Senior Software Engineer ",
     company: "Aigumind",
     subtitle:
-      "At Aigumind, I lead the development and deployment of MERN stack applications, guide interns through training sessions, and ensure project goals are achieved on schedule. My role blends technical execution with mentorship, contributing to scalable and efficient software solutions.",
+      "At Aigumind, I lead the development and deployment of MERN stack applications, guide interns through training sessions, and ensure project goals are achieved on schedule. My role blends technical execution with mentorship, contributing to scalable and efficient software solutions, following best practices.",
     period: "Jul 2025 – Present",
     iconSrc: "/AsadRazaExperience6.png",
   },
