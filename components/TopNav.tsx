@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Menu, X } from "lucide-react";
@@ -13,7 +13,7 @@ const GooeyNav = dynamic(() => import("./GooeyNav"), {
         {links.map((link, index) => (
           <a
             key={index}
-            href={link.href}
+            href={`#${link.href}`}
             className="outline-none py-[0.4em] px-[0.6em] sm:py-[0.5em] sm:px-[0.8em] md:py-[0.6em] md:px-[1em] inline-block text-sm sm:text-base whitespace-nowrap text-white hover:text-gray-300 transition-colors"
           >
             {link.label}
@@ -39,6 +39,8 @@ export default function TopNav() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
+  const isProgrammaticScroll = useRef<boolean>(false);
+  const programmaticScrollTimeout = useRef<number | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -53,6 +55,7 @@ export default function TopNav() {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isProgrammaticScroll.current) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             const targetId = (entry.target as HTMLElement).id;
@@ -71,31 +74,54 @@ export default function TopNav() {
     );
 
     sectionElements.forEach(el => observer.observe(el));
+
+    const handleScrollEnd = () => {
+      isProgrammaticScroll.current = false;
+      if (programmaticScrollTimeout.current) {
+        window.clearTimeout(programmaticScrollTimeout.current);
+        programmaticScrollTimeout.current = null;
+      }
+    };
+    window.addEventListener('scrollend', handleScrollEnd as EventListener);
+
     return () => {
       sectionElements.forEach(el => observer.unobserve(el));
       observer.disconnect();
+      window.removeEventListener('scrollend', handleScrollEnd as EventListener);
+      if (programmaticScrollTimeout.current) {
+        window.clearTimeout(programmaticScrollTimeout.current);
+        programmaticScrollTimeout.current = null;
+      }
     };
   }, [mounted]);
 
   const handleNavClick = (href: string, index: number) => {
     const el = document.getElementById(href);
     if (el) {
+      isProgrammaticScroll.current = true;
       el.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveIndex(index);
       setOpen(false);
+      // Fallback: ensure we re-enable observer updates after smooth scroll completes
+      if (programmaticScrollTimeout.current) {
+        window.clearTimeout(programmaticScrollTimeout.current);
+      }
+      programmaticScrollTimeout.current = window.setTimeout(() => {
+        isProgrammaticScroll.current = false;
+        programmaticScrollTimeout.current = null;
+      }, 1200);
     }
   };
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
       <header className="sticky top-0 z-50 w-full bg-[#1A0B2E] border-b border-white/5">
-        <div className="flex items-center justify-between px-4 py-4">
+        <div className="relative flex items-center justify-center px-4 py-4">
           {/* Desktop GooeyNav placeholder */}
-          <div className="hidden lg:block flex-1">
+          <div className="hidden lg:block">
             <GooeyNav
               items={links}
-              initialActiveIndex={activeIndex}
-              onItemClick={handleNavClick}
+            initialActiveIndex={activeIndex}
               particleCount={15}
               particleDistances={[90, 10]}
               particleR={100}
@@ -106,12 +132,14 @@ export default function TopNav() {
           </div>
 
           {/* Mobile hamburger button placeholder */}
-          <button
-            className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <Menu size={24} />
-          </button>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+            <button
+              className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <Menu size={24} />
+            </button>
+          </div>
         </div>
       </header>
     );
@@ -119,13 +147,12 @@ export default function TopNav() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#1A0B2E] border-b border-white/5">
-      <div className="flex items-center justify-between px-4 py-4">
+      <div className="relative flex items-center justify-center px-4 py-4">
         {/* Desktop GooeyNav */}
-        <div className="hidden lg:block flex-1">
+        <div className="hidden lg:block">
           <GooeyNav
             items={links}
-            activeIndex={activeIndex}
-            onItemClick={handleNavClick}
+            initialActiveIndex={activeIndex}
             particleCount={15}
             particleDistances={[90, 10]}
             particleR={100}
@@ -136,13 +163,15 @@ export default function TopNav() {
         </div>
 
         {/* Mobile hamburger button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors"
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <button
+            onClick={() => setOpen(!open)}
+            className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown */}

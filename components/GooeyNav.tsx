@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-interface  GooeyNavItem {
+interface GooeyNavItem {
   label: string;
   href: string;
 }
 
 export interface GooeyNavProps {
-   items :  GooeyNavItem[] ;
+  items: GooeyNavItem[];
   animationTime?: number;
   particleCount?: number;
   particleDistances?: [number, number];
@@ -14,31 +14,23 @@ export interface GooeyNavProps {
   timeVariance?: number;
   colors?: number[];
   initialActiveIndex?: number;
-  activeIndex?: number;
-  onItemClick?: (href: string, index: number) => void;
 }
 
 const GooeyNav: React.FC<GooeyNavProps> = ({
-  items ,
-  
+  items,
   animationTime = 600,
   particleCount = 15,
   particleDistances = [90, 10],
   particleR = 100,
   timeVariance = 300,
   colors = [1, 2, 3, 1, 2, 3, 1, 4],
-  initialActiveIndex = 0,
-  activeIndex: externalActiveIndex,
-  onItemClick
+  initialActiveIndex = 0
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLUListElement>(null);
   const filterRef = useRef<HTMLSpanElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
-  const [internalActiveIndex, setInternalActiveIndex] = useState<number>(initialActiveIndex);
-  
-  // Use external activeIndex if provided, otherwise use internal state
-  const activeIndex = externalActiveIndex !== undefined ? externalActiveIndex : internalActiveIndex;
+  const [activeIndex, setActiveIndex] = useState<number>(initialActiveIndex);
 
   const noise = (n = 1) => n / 2 - Math.random() * n;
   const getXY = (distance: number, pointIndex: number, totalPoints: number): [number, number] => {
@@ -75,7 +67,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         particle.style.setProperty('--end-y', `${p.end[1]}px`);
         particle.style.setProperty('--time', `${p.time}ms`);
         particle.style.setProperty('--scale', `${p.scale}`);
-        particle.style.setProperty('--color', `var(--color-${p.color}, white)`);
+        particle.style.setProperty('--color', `var(--color-${p.color}, #bf8afc)`);
         particle.style.setProperty('--rotate', `${p.rotate}deg`);
         point.classList.add('point');
         particle.appendChild(point);
@@ -109,17 +101,12 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     e.preventDefault();
     const liEl = e.currentTarget;
     if (activeIndex === index) return;
-    
-    // Update internal state only if no external activeIndex is provided
-    if (externalActiveIndex === undefined) {
-      setInternalActiveIndex(index);
+    setActiveIndex(index);
+    const targetId = items[index].href;
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    
-    // Call external click handler if provided
-    if (onItemClick) {
-      onItemClick(items[index].href, index);
-    }
-    
     updateEffectPosition(liEl);
     if (filterRef.current) {
       const particles = filterRef.current.querySelectorAll('.particle');
@@ -182,27 +169,27 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             z-index: 1;
           }
           .effect.text {
-            color: white;
+            color: #bf8afc;
             transition: color 0.3s ease;
           }
           .effect.text.active {
             color: black;
           }
           .effect.filter {
-            filter: blur(7px) contrast(100) blur(0);
             mix-blend-mode: lighten;
           }
-            .effect.filter::before {
-              content: "";
-              position: absolute;
-              inset: -75px;
-              z-index: -2;
-            }
+          .effect.filter::before {
+            content: "";
+            position: absolute;
+            inset: -75px;
+            z-index: -2;
+            background: transparent;
+          }
           .effect.filter::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: white;
+            background: #bf8afc;
             transform: scale(0);
             opacity: 0;
             z-index: -1;
@@ -297,37 +284,37 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             position: absolute;
             inset: 0;
             border-radius: 8px;
-            background: rgba(139, 92, 246, 0.3);
+            background: #bf8afc;
             opacity: 0;
             transform: scale(0);
             transition: all 0.3s ease;
             z-index: -1;
-                    }
+          }
         `}
       </style>
-       <div className="relative w-full" ref={containerRef}>
-         <nav className="flex justify-center relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
-           <ul
-             ref={navRef}
-             className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 list-none p-0 px-2 sm:px-4 m-0 relative z-[3] flex-wrap justify-center"
+      <div className="relative" ref={containerRef}>
+        <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
+          <ul
+            ref={navRef}
+            className="flex gap-8 list-none p-0 px-4 m-0 relative z-[3]"
             style={{
-              color: 'white',
-              textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)'
+              color: '#bf8afc',
+              // textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)'
             }}
           >
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
+                className={`rounded-full relative cursor-pointer transition duration-300 ease text-white ${
                   activeIndex === index ? 'active' : ''
                 }`}
               >
-                 <a
-                   href={item.href}
-                   onClick={e => handleClick(e, index)}
-                   onKeyDown={e => handleKeyDown(e, index)}
-                   className="outline-none py-[0.4em] px-[0.6em] sm:py-[0.5em] sm:px-[0.8em] md:py-[0.6em] md:px-[1em] inline-block text-sm sm:text-base whitespace-nowrap"
-                 >
+                <a
+                  href="#"
+                  onClick={e => handleClick(e, index)}
+                  onKeyDown={e => handleKeyDown(e, index)}
+                  className="outline-none py-[0.6em] px-[1em] inline-block"
+                >
                   {item.label}
                 </a>
               </li>

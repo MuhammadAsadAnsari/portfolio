@@ -69,6 +69,7 @@ export default function AboutMe() {
                 onFinalStepCompleted={() => console.log("Education journey completed!")}
                 backButtonText="Previous"
                 nextButtonText="Next"
+                hideCompleteButtonOnLastStep
                 stepCircleContainerClassName="bg-transparent border-transparent"
                 stepContainerClassName="bg-transparent"
                 contentClassName="bg-transparent"
