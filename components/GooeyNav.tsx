@@ -31,6 +31,8 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   const filterRef = useRef<HTMLSpanElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const [activeIndex, setActiveIndex] = useState<number>(initialActiveIndex);
+  const isProgrammaticScroll = useRef<boolean>(false);
+  const programmaticScrollTimeout = useRef<number | null>(null);
 
   const noise = (n = 1) => n / 2 - Math.random() * n;
   const getXY = (distance: number, pointIndex: number, totalPoints: number): [number, number] => {
@@ -105,7 +107,15 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     const targetId = items[index].href;
     const el = document.getElementById(targetId);
     if (el) {
+      isProgrammaticScroll.current = true;
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (programmaticScrollTimeout.current) {
+        window.clearTimeout(programmaticScrollTimeout.current);
+      }
+      programmaticScrollTimeout.current = window.setTimeout(() => {
+        isProgrammaticScroll.current = false;
+        programmaticScrollTimeout.current = null;
+      }, 1200);
     }
     updateEffectPosition(liEl);
     if (filterRef.current) {
@@ -151,6 +161,45 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     resizeObserver.observe(containerRef.current);
     return () => resizeObserver.disconnect();
   }, [activeIndex]);
+
+  // Update active index when user scrolls sections manually
+  useEffect(() => {
+    const sectionElements = items
+      .map(i => document.getElementById(i.href))
+      .filter(Boolean) as HTMLElement[];
+
+    if (sectionElements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (isProgrammaticScroll.current) return;
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const targetId = (entry.target as HTMLElement).id;
+            const index = items.findIndex(i => i.href === targetId);
+            if (index !== -1) {
+              setActiveIndex(index);
+            }
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: '-35% 0px -60% 0px',
+        threshold: 0
+      }
+    );
+
+    sectionElements.forEach(el => observer.observe(el));
+    return () => {
+      sectionElements.forEach(el => observer.unobserve(el));
+      observer.disconnect();
+      if (programmaticScrollTimeout.current) {
+        window.clearTimeout(programmaticScrollTimeout.current);
+        programmaticScrollTimeout.current = null;
+      }
+    };
+  }, [items]);
 
   return (
     <>

@@ -4,7 +4,11 @@ import Socials from "./Socials";
 export default function Availability() {
   return (
     <section id="contact" className="mx-auto max-w-6xl px-4 py-16 scroll-mt-20">
-      <SectionTitle>Get In Touch</SectionTitle>
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          Get in <span className="text-purple-400">Touch</span>
+        </h2>
+      </div>
       
       <div className="grid md:grid-cols-2 gap-8 mt-8">
         {/* Left Side - Availability Status */}

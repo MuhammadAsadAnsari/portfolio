@@ -59,7 +59,11 @@ const EXPERIENCES = [
 export default function WorkExperience() {
   return (
     <section id="work" className="mx-auto max-w-6xl px-4 pb-10 scroll-mt-20">
-      <SectionTitle>Work Experience</SectionTitle>
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          Work <span className="text-purple-400">Experience</span>
+        </h2>
+      </div>
       <div className="grid md:grid-cols-2 gap-4">
         {EXPERIENCES.map((exp, idx) => (
           <WorkCard key={idx} title={exp.title} company={exp.company} subtitle={exp.subtitle} period={exp.period} iconSrc={exp.iconSrc} />

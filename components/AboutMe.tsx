@@ -10,7 +10,11 @@ export default function AboutMe() {
 
   return (
     <section id="aboutMe" className="mx-auto max-w-6xl px-4 py-12 md:py-16 scroll-mt-20">
-      <SectionTitle>About Me</SectionTitle>
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          About <span className="text-purple-400">Me</span>
+        </h2>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-8">
         {/* Left Side - Clean Basic Info */}
