@@ -58,13 +58,13 @@ const EXPERIENCES = [
 
 export default function WorkExperience() {
   return (
-    <section id="work" className="mx-auto max-w-6xl px-4 pb-10 scroll-mt-20">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+    <section id="work" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-14 md:py-16 lg:py-20 scroll-mt-20">
+      <div className="text-center mb-12 sm:mb-14 md:mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
           Work <span className="text-purple-400">Experience</span>
         </h2>
       </div>
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
         {EXPERIENCES.map((exp, idx) => (
           <WorkCard key={idx} title={exp.title} company={exp.company} subtitle={exp.subtitle} period={exp.period} iconSrc={exp.iconSrc} />
         ))}

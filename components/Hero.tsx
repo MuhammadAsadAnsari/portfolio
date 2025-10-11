@@ -136,7 +136,7 @@ export default function Hero() {
     <section
       id="home"
       onMouseMove={handleMouseMove}
-      className="relative w-full px-4 min-h-screen flex items-center justify-center scroll-mt-20 py-8 md:py-0"
+      className="relative w-full px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center scroll-mt-20 py-12 sm:py-16 md:py-20 lg:py-0"
       style={{
         background: `
           radial-gradient(circle at 30% 30%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
@@ -147,77 +147,77 @@ export default function Hero() {
       }}
     >
       <motion.div initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0 }}>
-        <div className="grid md:grid-cols-2 items-center gap-6 md:gap-10 relative z-20 max-w-7xl w-full overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-10 lg:gap-12 relative z-20 max-w-7xl w-full overflow-hidden">
           {/* Content */}
-          <div className="order-2 md:order-1">
+          <div className="order-2 md:order-1 space-y-4 sm:space-y-5">
             <motion.div style={{ x, y }}>
               <div className="text-center md:text-left">
-                <h1 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[72px] font-extrabold leading-[1.05]">
-                  Asad <span className="text-accent">Raza</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+                  Asad <span className="text-purple-400">Raza</span>
                 </h1>
-                <p className="mt-3 text-[16px] sm:text-[18px] text-white/80">Full Stack Developer</p>
+                <p className="mt-2 sm:mt-3 text-base sm:text-lg md:text-xl text-white/80">Full Stack Developer</p>
 
                 {/* honest one-liner to fill the visual gap */}
-                <p className="mt-3 text-sm sm:text-base text-white/75">
-                  I don’t overpromise. I ship clean, testable code, communicate daily, and own the result.
+                <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/75 leading-relaxed">
+                  I don't overpromise. I ship clean, testable code, communicate daily, and own the result.
                 </p>
 
-                <p className="mt-4 text-sm sm:text-base md:text-lg text-white/70 max-w-lg sm:max-w-xl mx-auto md:mx-0">
+                <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base lg:text-lg text-white/70 max-w-lg sm:max-w-xl mx-auto md:mx-0 leading-relaxed">
                   Passionate about crafting functional, accessible and user-centered digital experiences. I specialize
                   in modern web technologies and love bringing ideas to life through code.
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center gap-2 justify-center md:justify-start">
-                  {["React", "Next.js", "TypeScript"].map((t) => (
-                    <span key={t} className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-white/80">
+                <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2 justify-center md:justify-start">
+                  {["Nestjs", "Next.js", "TypeScript"].map((t) => (
+                    <span key={t} className="px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm bg-white/5 border border-white/10 text-white/80">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 md:gap-4">
+                <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3">
                   <button
                     onClick={handleResumeDownload}
-                    className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-xl bg-white text-[#11071F] text-sm sm:text-base font-semibold hover:opacity-90 transition flex items-center gap-2 min-w-[100px] sm:min-w-[120px]"
+                    className="px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl bg-white text-[#11071F] text-xs sm:text-sm md:text-base font-semibold hover:opacity-90 transition flex items-center gap-1.5 sm:gap-2 min-w-[100px] sm:min-w-[120px]"
                   >
-                    <Download size={16} className="sm:w-[18px] sm:h-[18px]" />
+                    <Download size={16} className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                     Resume
                   </button>
 
                   <button
                     onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                    className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-xl border border-accent/40 text-white text-sm sm:text-base font-semibold hover:bg-accent/20 transition min-w-[120px] sm:min-w-[140px]"
+                    className="px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl border border-accent/40 text-white text-xs sm:text-sm md:text-base font-semibold hover:bg-accent/20 transition min-w-[120px] sm:min-w-[140px]"
                   >
                     View Projects
                   </button>
 
                   {/* Socials */}
-                  <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
                     <Link
                       href="https://github.com/MuhammadAsadAnsari"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 sm:p-3 rounded-xl border border-white/15 hover:border-white/30 transition hover:bg-white/5 min-w-[40px] min-h-[40px] sm:min-w-[48px] sm:min-h-[48px] flex items-center justify-center"
+                      className="p-2 sm:p-2.5 md:p-3 rounded-xl border border-white/15 hover:border-white/30 transition hover:bg-white/5 min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] md:min-w-[48px] md:min-h-[48px] flex items-center justify-center"
                     >
-                      <Github size={20} className="text-white" />
+                      <Github size={18} className="sm:w-5 sm:h-5 text-white" />
                     </Link>
 
                     <Link
                       href="https://linkedin.com/in/asadrazaansari"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 sm:p-3 rounded-xl border border-white/15 hover:border-white/30 transition hover:bg-white/5 min-w-[40px] min-h-[40px] sm:min-w-[48px] sm:min-h-[48px] flex items-center justify-center"
+                      className="p-2 sm:p-2.5 md:p-3 rounded-xl border border-white/15 hover:border-white/30 transition hover:bg-white/5 min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] md:min-w-[48px] md:min-h-[48px] flex items-center justify-center"
                     >
-                      <Linkedin size={20} className="text-white" />
+                      <Linkedin size={18} className="sm:w-5 sm:h-5 text-white" />
                     </Link>
 
                     <Link
                       href="https://www.quora.com/profile/Muhammad-Asad-1994"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 sm:p-3 rounded-xl border border-white/15 hover:border-white/30 transition hover:bg-white/5 min-w-[40px] min-h-[40px] sm:min-w-[48px] sm:min-h-[48px] flex items-center justify-center"
+                      className="p-2 sm:p-2.5 md:p-3 rounded-xl border border-white/15 hover:border-white/30 transition hover:bg-white/5 min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] md:min-w-[48px] md:min-h-[48px] flex items-center justify-center"
                     >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="sm:w-5 sm:h-5 text-white">
                         <path d="M12.738 18.701c-.831-1.635-1.805-3.002-3.708-3.729-.829-.358-1.462-.469-2.02-.469-2.348 0-4.262 1.978-4.262 4.41 0 2.431 1.914 4.41 4.262 4.41.558 0 1.191-.111 2.02-.469 1.903-.727 2.877-2.094 3.708-3.729.831 1.635 1.805 3.002 3.708 3.729.829.358 1.462.469 2.02.469 2.348 0 4.262-1.978 4.262-4.41 0-2.431-1.914-4.41-4.262-4.41-.558 0-1.191.111-2.02.469-1.903.727-2.877 2.094-3.708 3.729zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" />
                       </svg>
                     </Link>
@@ -233,9 +233,9 @@ export default function Hero() {
           </div>
 
           {/* Avatar */}
-          <div className="order-1 md:order-2 flex justify-center md:justify-end mt-10 md:mt-0">
-            <div className="relative rounded-3xl p-1.5 bg-gradient-to-br from-[#2A1748] to-[#0F0A1A] border border-white/10 shadow-2xl shadow-purple-500/10">
-              <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 rounded-2xl overflow-hidden ring-1 ring-white/10">
+          <div className="order-1 md:order-2 flex justify-center md:justify-end mt-6 sm:mt-8 md:mt-0">
+            <div className="relative rounded-2xl sm:rounded-3xl p-1 sm:p-1.5 bg-gradient-to-br from-[#2A1748] to-[#0F0A1A] border border-white/10 shadow-2xl shadow-purple-500/10">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10">
                 <Image src="/AsadRazaAvatar.png" alt="Asad Raza Avatar" fill priority />
               </div>
             </div>

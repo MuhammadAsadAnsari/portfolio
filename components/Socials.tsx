@@ -74,10 +74,10 @@ function EmailMenu() {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="bg-white/5 backdrop-blur border border-white/10 rounded-xl px-3 py-2 inline-flex items-center gap-2 transition hover:bg-white/10"
+        className="bg-white/5 backdrop-blur border border-white/10 rounded-lg sm:rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 inline-flex items-center gap-1.5 sm:gap-2 transition hover:bg-white/10"
       >
-        <Mail className="h-4 w-4" />
-        <span className="text-xs">Email</span>
+        <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+        <span className="text-[10px] sm:text-xs">Email</span>
         <ChevronDown className="h-3 w-3 opacity-70" />
       </button>
 
@@ -116,7 +116,7 @@ function EmailMenu() {
 
 export default function Socials() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3">
+    <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
       {socials.map(({ href, icon: Icon, label }) => (
         <Link
           key={href}
@@ -124,10 +124,10 @@ export default function Socials() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className="bg-white/5 backdrop-blur border border-white/10 rounded-xl px-3 py-2 inline-flex items-center gap-2 transition hover:bg-white/10"
+          className="bg-white/5 backdrop-blur border border-white/10 rounded-lg sm:rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 inline-flex items-center gap-1.5 sm:gap-2 transition hover:bg-white/10"
         >
-          <Icon className="h-4 w-4" />
-          <span className="text-xs">{label}</span>
+          <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          <span className="text-[10px] sm:text-xs">{label}</span>
         </Link>
       ))}
 
