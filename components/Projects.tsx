@@ -1,4 +1,5 @@
 "use client";
+import { memo } from 'react';
 import SectionTitle from "./SectionTitle";
 import SpotlightCard from './SpotlightCard';
 import Image from 'next/image';
@@ -66,7 +67,7 @@ const projects: Project[] = [
   // }
 ];
 
-export default function Projects() {
+function Projects() {
   return (
     <section id="projects" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-14 md:py-16 lg:py-20 space-y-12 sm:space-y-14 md:space-y-16 scroll-mt-20">
       <div className="text-center mb-12 sm:mb-14 md:mb-16">
@@ -102,6 +103,9 @@ export default function Projects() {
                   alt={project.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
+                  quality={85}
                 />
               </div>
               
@@ -165,3 +169,5 @@ export default function Projects() {
     </section>
   );
 }
+
+export default memo(Projects);

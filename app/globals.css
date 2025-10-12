@@ -2,37 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom animations for AboutMe component */
+/* Performance optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom animations for AboutMe component - GPU accelerated */
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translate3d(-50px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translate3d(50px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -48,63 +53,68 @@
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale3d(0.9, 0.9, 1);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
 .animate-fade-in-left {
   animation: fadeInLeft 0.6s ease-out forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .animate-fade-in-right {
   animation: fadeInRight 0.6s ease-out forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
   opacity: 0;
+  will-change: opacity;
 }
 
 .animate-fade-in-scale {
   animation: fadeInScale 0.5s ease-out forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
-/* Enhanced animations */
+/* Enhanced animations - GPU accelerated */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   25% {
-    transform: translateY(-10px) rotate(2deg);
+    transform: translate3d(0, -10px, 0) rotate(2deg);
   }
   50% {
-    transform: translateY(-5px) rotate(-1deg);
+    transform: translate3d(0, -5px, 0) rotate(-1deg);
   }
   75% {
-    transform: translateY(-15px) rotate(1deg);
+    transform: translate3d(0, -15px, 0) rotate(1deg);
   }
 }
 
 @keyframes counterUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -129,19 +139,23 @@
 .animate-float {
   animation: float 6s ease-in-out infinite;
   opacity: 0.8;
+  will-change: transform;
 }
 
 .counter-animation {
   animation: counterUp 1s ease-out forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .animate-pulse-slow {
   animation: pulse 3s ease-in-out infinite;
+  will-change: opacity;
 }
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 /* Stepper alignment fixes */

@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import SectionTitle from "./SectionTitle";
 import Stepper, { Step } from "./Stepper";
 
-export default function AboutMe() {
+function AboutMe() {
   const [currentStep, setCurrentStep] = useState(1);
 
 
@@ -85,7 +85,7 @@ export default function AboutMe() {
                   className: "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
                 }}
               >
-                <Step>
+                {/* <Step>
                   <div className="text-center space-y-3 sm:space-y-4 animate-fade-in-scale">
                     <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white">🎓 High School</h3>
                     <div className="bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-purple-400/40 backdrop-blur-sm">
@@ -97,7 +97,7 @@ export default function AboutMe() {
                     </div>
 
                   </div>
-                </Step>
+                </Step> */}
 
                 <Step>
                   <div className="text-center space-y-3 sm:space-y-4 animate-fade-in-scale">
@@ -150,3 +150,5 @@ export default function AboutMe() {
     </section>
   );
 }
+
+export default memo(AboutMe);

@@ -1,13 +1,13 @@
 "use client";
 
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, memo, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Download, Github, Linkedin, Mail, ChevronDown, Copy } from "lucide-react";
 
-// small helper so we can re-use this anywhere
-function EmailMenu({
+// Memoized email menu component
+const EmailMenu = memo(function EmailMenu({
   buttonClass = "",
   label = "Email",
 }: {
@@ -28,23 +28,23 @@ function EmailMenu({
 
   const to = encodeURIComponent(EMAIL);
   const subject = encodeURIComponent("Project inquiry");
-  const body = encodeURIComponent("Hi Asad,\n\nI’d like to discuss...");
+  const body = encodeURIComponent("Hi Asad,\n\nI'd like to discuss...");
 
-  const items = [
+  const items = useMemo(() => [
     { label: "Gmail (web)", href: `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`, blank: true },
     { label: "Outlook (web)", href: `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${subject}&body=${body}`, blank: true },
     { label: "Yahoo (web)", href: `https://compose.mail.yahoo.com/?to=${to}&subject=${subject}&body=${body}`, blank: true },
     { label: "Default email app", href: `mailto:${EMAIL}?subject=${subject}&body=${body}`, blank: false },
-  ];
+  ], [to, subject, body, EMAIL]);
 
-  const copyAddr = async () => {
+  const copyAddr = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
     } catch {
       window.prompt("Copy this email address:", EMAIL);
     }
     setOpen(false);
-  };
+  }, [EMAIL]);
 
   return (
     <div className="relative" ref={popRef}>
@@ -91,9 +91,12 @@ function EmailMenu({
       )}
     </div>
   );
-}
+});
 
-export default function Hero() {
+// Tech stack data memoized
+const TECH_STACK = ["Nestjs", "Next.js", "TypeScript"] as const;
+
+function Hero() {
   const baseX = useMotionValue(0);
   const baseY = useMotionValue(0);
   const waveX = useMotionValue(0);
@@ -101,14 +104,14 @@ export default function Hero() {
   const x = useTransform([baseX, waveX], (vals) => (vals[0] as number) + (vals[1] as number));
   const y = useTransform([baseY, waveY], (vals) => (vals[0] as number) + (vals[1] as number));
 
-  const handleResumeDownload = () => {
+  const handleResumeDownload = useCallback(() => {
     const link = document.createElement("a");
-    link.href = "/resume.pdf";
+    link.href = "/Resume.pdf";
     link.download = "Asad_Raza_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
@@ -168,7 +171,7 @@ export default function Hero() {
                 </p>
 
                 <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2 justify-center md:justify-start">
-                  {["Nestjs", "Next.js", "TypeScript"].map((t) => (
+                  {TECH_STACK.map((t) => (
                     <span key={t} className="px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm bg-white/5 border border-white/10 text-white/80">
                       {t}
                     </span>
@@ -236,7 +239,14 @@ export default function Hero() {
           <div className="order-1 md:order-2 flex justify-center md:justify-end mt-6 sm:mt-8 md:mt-0">
             <div className="relative rounded-2xl sm:rounded-3xl p-1 sm:p-1.5 bg-gradient-to-br from-[#2A1748] to-[#0F0A1A] border border-white/10 shadow-2xl shadow-purple-500/10">
               <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10">
-                <Image src="/AsadRazaAvatar.png" alt="Asad Raza Avatar" fill priority />
+                <Image 
+                  src="/AsadRazaAvatar.png" 
+                  alt="Asad Raza Avatar" 
+                  fill 
+                  priority 
+                  sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, (max-width: 1024px) 256px, 288px"
+                  quality={90}
+                />
               </div>
             </div>
           </div>
@@ -250,3 +260,5 @@ export default function Hero() {
     </section>
   );
 }
+
+export default memo(Hero);
