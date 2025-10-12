@@ -2,8 +2,8 @@ node_modules/
 .next/
 out/
 dist/
-.env*
 .DS_Store
 .vscode/
 npm-debug.log*
 yarn-*.log*
+config.bat
