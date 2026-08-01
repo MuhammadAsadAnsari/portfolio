@@ -74,7 +74,7 @@ const EXPERIENCES: Experience[] = [
     company: "Aigumind",
     subtitle:
       "At Aigumind, I lead the development and deployment of MERN stack applications, guide interns through training sessions, and ensure project goals are achieved on schedule. My role blends technical execution with mentorship, contributing to scalable and efficient software solutions, following best practices.",
-    period: "Jul 2025 – Present",
+    period: "Jul 2025 – Feb 2026",
     iconSrc: null,
     customIcon: <CircuitBoardIcon className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 text-purple-400" />,
   },

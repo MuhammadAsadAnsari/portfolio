@@ -38,7 +38,7 @@ function AboutMe() {
 
             <div className="space-y-4 sm:space-y-5">
               <p className="text-white leading-relaxed text-center max-w-lg mx-auto text-sm sm:text-base md:text-lg drop-shadow-sm">
-                I'm a passionate developer with over 2.5 years of experience building modern, scalable, and user-focused web applications. I work with technologies like React, Node.js, NestJS, Express, MongoDB, PostgreSQL, TypeORM, and Redis, and have integrated APIs such as Stripe and Zoom to deliver real-world functionality. I enjoy transforming ideas into clean, efficient systems that provide seamless user experiences.
+                I'm a passionate developer with over 3 years of experience building modern, scalable, and user-focused web applications. I work with technologies like React, Node.js, NestJS, Express, MongoDB, PostgreSQL, TypeORM, and Redis, and have integrated APIs such as Stripe and Zoom to deliver real-world functionality. I enjoy transforming ideas into clean, efficient systems that provide seamless user experiences.
               </p>
               <p className="text-white leading-relaxed text-center max-w-lg mx-auto text-sm sm:text-base md:text-lg drop-shadow-sm">
                 I'm constantly learning and exploring new tools to improve my craft and stay ahead in the ever-evolving tech world. Beyond coding, I'm fitness-focused, faith-driven, and believe in keeping life simple, balanced, and meaningful. I perform namaz regularly and live by the mindset that with hard work, consistency, and trust in Allah, everything falls into place.

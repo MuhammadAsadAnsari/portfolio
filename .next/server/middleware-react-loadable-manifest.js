@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"components/TopNav.tsx -> ./GooeyNav":{"id":6236,"files":["static/chunks/236.1b86bcdd11db03ad.js"]}}';
