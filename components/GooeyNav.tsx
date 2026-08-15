@@ -116,6 +116,9 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         isProgrammaticScroll.current = false;
         programmaticScrollTimeout.current = null;
       }, 1200);
+    } else {
+      window.location.href = `/#${targetId}`;
+      return;
     }
     updateEffectPosition(liEl);
     if (filterRef.current) {
@@ -345,7 +348,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
           <ul
             ref={navRef}
-            className="flex gap-8 list-none p-0 px-4 m-0 relative z-[3]"
+            className="flex gap-4 xl:gap-8 list-none p-0 px-4 m-0 relative z-[3]"
             style={{
               color: '#bf8afc',
               // textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)'

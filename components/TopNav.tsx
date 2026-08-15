@@ -31,6 +31,7 @@ const links = [
   { href: "aboutMe", label: "About Me" },
   { href: "work", label: "Work" },
   { href: "skills", label: "Skills" },
+  { href: "services", label: "Services" },
   { href: "projects", label: "Projects" },
   { href: "contact", label: "Contact" },
 ];
@@ -110,7 +111,10 @@ export default function TopNav() {
         isProgrammaticScroll.current = false;
         programmaticScrollTimeout.current = null;
       }, 1200);
+      return;
     }
+    setOpen(false);
+    window.location.href = `/#${href}`;
   };
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {

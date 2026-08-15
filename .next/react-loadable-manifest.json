@@ -1,8 +1,8 @@
 {
-  "components/TopNav.tsx -> ./GooeyNav": {
-    "id": 6236,
+  "components\\TopNav.tsx -> ./GooeyNav": {
+    "id": "components\\TopNav.tsx -> ./GooeyNav",
     "files": [
-      "static/chunks/236.1b86bcdd11db03ad.js"
+      "static/chunks/_app-pages-browser_components_GooeyNav_tsx.js"
     ]
   }
 }

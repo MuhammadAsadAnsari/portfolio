@@ -158,7 +158,7 @@ function Hero() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
                   Asad <span className="text-purple-400">Raza</span>
                 </h1>
-                <p className="mt-2 sm:mt-3 text-base sm:text-lg md:text-xl text-white/80">Full Stack Developer</p>
+                <p className="mt-2 sm:mt-3 text-base sm:text-lg md:text-xl text-white/80">Full Stack Developer with Marketing Expertise</p>
 
                 {/* honest one-liner to fill the visual gap */}
                 <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/75 leading-relaxed">
@@ -188,10 +188,10 @@ function Hero() {
                   </button>
 
                   <button
-                    onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                    onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                     className="px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl border border-accent/40 text-white text-xs sm:text-sm md:text-base font-semibold hover:bg-accent/20 transition min-w-[120px] sm:min-w-[140px]"
                   >
-                    View Projects
+                    View Services
                   </button>
 
                   {/* Socials */}

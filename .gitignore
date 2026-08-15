@@ -3,7 +3,6 @@ node_modules/
 out/
 dist/
 .DS_Store
-.vscode/
 npm-debug.log*
 yarn-*.log*
 config.bat

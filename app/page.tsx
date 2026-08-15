@@ -11,6 +11,9 @@ const WorkExperience = dynamic(() => import("@/components/WorkExperience"), {
 const Skills = dynamic(() => import("@/components/Skills"), {
   loading: () => <div className="min-h-[400px]" />,
 });
+const Services = dynamic(() => import("@/components/Services"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
 const Projects = dynamic(() => import("@/components/Projects"), {
   loading: () => <div className="min-h-[400px]" />,
 });
@@ -28,6 +31,7 @@ export default function HomePage() {
       <AboutMe />
       <WorkExperience />
       <Skills />
+      <Services />
       <Projects />
       <Availability />
       <Footer />

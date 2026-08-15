@@ -32,13 +32,13 @@ function AboutMe() {
                  Asad Raza
                </h2>
                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-cyan-200 font-medium drop-shadow-md">
-                 Full Stack Developer
+                 Full Stack Developer with Marketing Expertise
                </p>
             </div>
 
             <div className="space-y-4 sm:space-y-5">
               <p className="text-white leading-relaxed text-center max-w-lg mx-auto text-sm sm:text-base md:text-lg drop-shadow-sm">
-                I'm a passionate developer with over 3 years of experience building modern, scalable, and user-focused web applications. I work with technologies like React, Node.js, NestJS, Express, MongoDB, PostgreSQL, TypeORM, and Redis, and have integrated APIs such as Stripe and Zoom to deliver real-world functionality. I enjoy transforming ideas into clean, efficient systems that provide seamless user experiences.
+                I'm a Full Stack Developer with Marketing Expertise — over 3 years of experience building modern, scalable, and user-focused web applications, plus the digital marketing work that helps those products get found. I work with technologies like React, Node.js, NestJS, Express, MongoDB, PostgreSQL, TypeORM, and Redis, and have integrated APIs such as Stripe and Zoom to deliver real-world functionality.
               </p>
               <p className="text-white leading-relaxed text-center max-w-lg mx-auto text-sm sm:text-base md:text-lg drop-shadow-sm">
                 I'm constantly learning and exploring new tools to improve my craft and stay ahead in the ever-evolving tech world. Beyond coding, I'm fitness-focused, faith-driven, and believe in keeping life simple, balanced, and meaningful. I perform namaz regularly and live by the mindset that with hard work, consistency, and trust in Allah, everything falls into place.
